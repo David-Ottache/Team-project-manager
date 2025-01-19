@@ -34,5 +34,24 @@ def main():
 
         #check if item already exists in the cart
         if any(item['name'] == item_name for item in cart):
-            print(f"item '{item_name}")
+            print(f"item '{item_name}' is already in the cart. Skipping duplicate.")
+            continue
+        
+        # Add item to cart
+        final_price, item_details = add_to_cart(item_name, price, *discounts, **details)
+        cart.append({'name': item_name, 'price': final_price, 'details': item_details})
+        total_cost += final_price
+        print(f"Item added: {item_name} - Final Price: ${final_price:.2f}")
+    
+    # Display cart summary
+    print("\n--- Cart Summary ---")
+    for item in cart:
+        print(f"{item['name']} - ${item['price']:.2f} ({item['details']})")
+    print(f"Total Cost: ${total_cost:.2f}")
+
+
+# Run the program
+if __name__ == "__main__":
+    main()
+
 
